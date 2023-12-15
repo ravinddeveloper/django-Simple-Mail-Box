@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+<br>
+{% comment %} <label>Name : </label> {% endcomment %}
+<label>replying to : </label>
+<label name="email">{{data1.email}}</label><br>
+<label>reply msg :</label>
+
+<form action="{% url "reply" data.u_id%}" method="post">
+    {% csrf_token %}
+    <input class="" type="text" name="reply_text"  required>
+    <input class="" type="submit" value="Send">
+</form>
+{%endblock%}

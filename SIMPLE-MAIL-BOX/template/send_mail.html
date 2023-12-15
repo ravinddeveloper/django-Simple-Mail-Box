@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(255, 255, 255); user-select: auto;"></div>
+      
+<div class="container" style="user-select: auto;">
+    <div class="wrapper p-3 py-5 p-lg-5" style="user-select: auto;">
+      <div class="row justify-content-between" style="user-select: auto;">
+           
+          <div class="col-12 col-lg-5 card p-5 mt-4 mt-lg-0" style="user-select: auto;">
+              <div class="mbr-form" style="user-select: auto;">
+                  <form action="" method="POST" class="mbr-form form-with-styler" style="user-select: auto;">
+                      {% csrf_token %} 
+                      <div class="row" style="user-select: auto;">
+                        {% for msg in messages%}
+                          <div  data-form-alert-danger="" class="alert alert-danger col-12" style="user-select: auto;">
+                            {{msg}}
+                          </div>
+                          {%endfor%}
+                      </div>
+                     {{error}}
+                      <div class="dragArea row justify-content-center" style="user-select: auto;">
+                          <div class="col-12 mb-4" style="user-select: auto;">
+                              <h2 class="mbr-section-title mbr-fonts-style display-2" style="user-select: auto;">send mail</h2>
+                          </div>
+                
+                          <div class="col-12 form-group mb-4" data-for="Full Name" style="user-select: auto;">
+                              <input type="email" name="email_id"  placeholder="Client Email id " data-form-field="Name" required="required" class="form-control display-7 " id="Name-form04-a" style="user-select: auto;">
+                          </div>
+                  
+                          <div class="col-12 form-group mb-4" data-for="Mail subject" style="user-select: auto;">
+                              <input type="text-area" name="subject" placeholder="Mail Subject" data-form-field="Name" required="required" class="form-control display-7" id="Name-form04-a" style="user-select: auto;">
+                              
+                          </div>
+                          <div data-for="text" class="col-12 form-group mb-4" style="user-select: auto;">
+                            <textarea class="form-control display-7" name="msg" rows="4" cols="50" placeholder="Enter message To Send" required></textarea>
+                          </div>
+                        
+                          <div class="col-12 mbr-section-btn" style="user-select: auto;"><button type="submit" class="btn btn-primary justify-content-center display-7" style="user-select: auto;">
+                                  SEND
+                              </button></div>
+                      </div>
+                  </form>
+                 
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

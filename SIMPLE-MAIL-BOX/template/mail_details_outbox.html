@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div style="padding:80px;">
+    <div class="card">
+      <div class="card-header">
+        <label>date : </label>  {{data.date}} <br>
+        <label>email id :  </label>{{data.r_email}} <br>
+      </div>
+      <div class="card-body">
+        <blockquote>
+          <legend></legend>
+          <h4 class="card-title">subject: </h4><p>{{data.subject}}</p>
+          <h4 class="card-text ">mail : </h4><p>{{data.msg}}</p>
+        </blockquote>
+        {{data.reply_msg}}
+        {% comment %} <a href="{% url "dashboard" %}" class="btn btn-primary">go back</a>
+        {% if data.reply == False %}
+          <a href="{% url "reply" data.u_id %}" class="btn btn-primary">reply</a>
+        {% endif %} {% endcomment %}
+        <hr>
+        <p><b>reply message:</b></p>
+         {{data.reply_msg}}
+      </div>
+      
+    </div>
+</div>
+
+{%endblock%}

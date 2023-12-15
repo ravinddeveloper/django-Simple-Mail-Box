@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<div class= " container  box-shadow">
+    <div class="container ">
+        <h1>login</h1>
+        <hr>
+        <form method="post" action="/account/login/"> 
+          {% csrf_token%}
+          {% for msg in messages%}
+          <div class="alert alert-primary" role="alert">
+           {{msg}}
+          </div>
+          {%endfor%}
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input type="text" name="uname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" required>
+              {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="pass1" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            </div>
+            <p>Don't Have a account Register<a href="/account/register/">HERE</a></p>
+          
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+</div>
+
+{% endblock body %}

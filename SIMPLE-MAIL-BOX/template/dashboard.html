@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block body %}
+          <br>
+          <!-- <marquee behavior="" direction="right" onmouseover="stop()" onmouseleave="start()">hello</marquee> -->
+          <br>
+          <br>
+          {% for msg in messages%}
+              <div class="alert alert-primary" role="alert">
+              {{msg}}
+              </div>
+          {%endfor%}
+          
+
+        {% if data3.verify == True %}
+              <div class="container" style="display: inline-flexbox; padding:5px;height: 400px; border: 1px solid;overflow-y: scroll;">
+                <table class="table table-striped">
+                    <thead style="position: sticky;top:0;">
+                      <tr><th colspan="5">INBOX</th></tr>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">SENDER</th>
+                        <th scope="col">SUBJECT</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     <td></td> <td></td> <td></td> <td></td> <td></td>
+                      {% for obj in data2 %}
+                      
+                        <tr>
+                          {% if obj.read %}
+                              <td><a class="class_a" href="/mail_details/{{obj.u_id}}">{{forloop.counter}}</a></td>
+                              {% for i in users %}
+                                  {% if i == obj.user %}
+                                   <td><a class="class_a" href="/mail_details/{{obj.u_id}}">{{i.email}}</a></td>
+                                  {%endif%} 
+                              {%endfor%}
+                              <td> <a class="class_a" href="/mail_details/{{obj.u_id}}">{{obj.subject}}</a></td>
+                              <td><a class="class_a" href="/mail_details/{{obj.u_id}}"> {{obj.date}}</a></td>
+                              {%if obj.reply == False%}<td><a class="class_a" href="/mail_details/{{obj.u_id}}"><span class="badge badge-pill badge-danger" style="color: white; background-color: blue;">reply</span></a></td>{% endif %}
+                              {%if obj.reply == True%}<td><a class="class_a" href="/mail_details/{{obj.u_id}}"><span class="badge badge-pill badge-success" style="color: white; background-color: green;">replied</span></a></td>{% endif %}
+                          {% else %}
+                              <td><a class="class_a" href="/mail_details/{{obj.u_id}}"><b>{{forloop.counter}}</b></a></td>
+                              {% for i in users %}
+                                  {% if i == obj.user %}
+                                   <td><a class="class_a" href="/mail_details/{{obj.u_id}}"><b>{{i.email}}</b></a></td>
+                                  {%endif%} 
+                              {%endfor%}
+                              <td><a class="class_a" href="/mail_details/{{obj.u_id}}"><b> {{obj.subject}}</b></a></td>
+                              <td> <a class="class_a" href="/mail_details/{{obj.u_id}}"><b>{{obj.date}}</b></a></td>
+                              {%if obj.reply == False%}<td><a class="class_a" href="/mail_details/{{obj.u_id}}"><span class="badge badge-pill badge-danger" style="color: white; background-color: blue;">reply</span></a></td>{% endif %}
+                              {%if obj.reply == True%}<td><a class="class_a" href="/mail_details/{{obj.u_id}}"><span class="badge badge-pill badge-success" style="color: white; background-color: green;">replied</span></a></td>{% endif %}
+                          {% endif %}
+                      
+                        </tr>
+                      {%empty%}
+                      <tr>
+                        <td colspan="3">No Messages Are Received</td>
+                      </tr>
+                      {% endfor %}
+                      
+                    
+                    </tbody>
+                </table>
+              </div> 
+              <div class="container" style="display: inline-flexbox; padding:5px;height: 400px; border: 1px solid;overflow-y: scroll;margin-top: 10px;">
+                <table class="table table-striped mt-5">
+                  
+                  <thead style="position: sticky;top:0;">
+                    <tr><th colspan="5">OUTBOX</th></tr>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">SENT TO</th>
+                      <th scope="col">SUBJECT</th>
+                      <th scope="col">DATE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td></td> <td></td> <td></td> <td></td> <td></td>
+                    {% for obj1 in data %}
+                            <tr>
+                              
+                              <td><a class="class_a" href="/outbox/{{obj1.u_id}}"><i>{{forloop.counter}}</i></a></td>
+                              <td><a class="class_a" href="/outbox/{{obj1.u_id}}"><i>{{obj1.r_email}}</i></a></td>
+                              <td><a class="class_a" href="/outbox/{{obj1.u_id}}"><i> {{obj1.subject}}</i></a></td>
+                              <td><a class="class_a" href="/outbox/{{obj1.u_id}}"> <i>{{obj1.date}}</i></a></td>
+                          
+                            </tr>
+                      {%empty%}
+                            <tr>
+                              <td colspan="3">No Messages Are sent</td>
+                            </tr>
+                    {% endfor %}
+                      
+                  
+                  </tbody>
+                </table>
+              </div> 
+
+                <a href="/send" class="compose"><span>&#43;</span></a>
+        {%else%}
+              <div class="card text-center">
+                <div class="card-header">
+                  Email Verification
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">EMAIL IS NOT  VERIFIED</h5>
+                  <p class="card-text">Please Verify Your email. This window will be in block till Verification</p>
+                  <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">verify Now</a>
+                </div>
+              </div>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Confirm To send Email</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Click on verify Now to receive mail
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <a href="/verify" class="btn btn-primary">verify Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        {% endif%}
+{% endblock %}

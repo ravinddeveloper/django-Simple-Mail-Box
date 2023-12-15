@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container" style="border:1px solid;padding:10px;margin-top:1%;border-radius:10px;">
+                {% for msg in messages%}
+                    <div class="alert alert-primary" role="alert">
+                        {{msg}}
+                    </div>
+                {%endfor%}
+
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                <input type="text" name="email" readonly class="form-control-plaintext" id="staticEmail" value="{{user.email}}">
+                {% if data.verify == True %}
+                <span class="badge bg-primary">Verified</span>
+                {% else %}
+                <span class="badge bg-danger">Not Verified</span>
+                {% endif %}
+                </div>
+                
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                <input type="text"name="" readonly class="form-control-plaintext" id="staticEmail" value="{{user.username}}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-10">
+                <input type="text" name="" readonly class="form-control-plaintext" id="staticEmail" value="{{user.first_name}}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-10">
+                <input type="text" name="" readonly class="form-control-plaintext" id="staticEmail" value="{{user.last_name}}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">User Status</label>
+                <div class="col-sm-10">
+                <input type="text" name="" readonly class="form-control-plaintext" id="staticEmail" {% if user.is_active == True %} value="Active"{%else%} value="Not Active"{% endif%}>
+                </div>
+            </div>
+         
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Change Password</a>
+</div>  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm Identity</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form method="post" action="">
+                {% csrf_token%}
+                <div class="modal-body">
+                      <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                          <input type="password"  name="pass1" class="form-control" id="inputPassword" required>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">verify</button>
+                </div>
+            </form> 
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

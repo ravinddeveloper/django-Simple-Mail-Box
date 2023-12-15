@@ -1,0 +1,33 @@
+.box-shadow{
+    height:500px;
+    width:500px;
+    filter: drop-shadow(1px 1px 0px blue);
+}
+.compose{
+    text-decoration: none;
+    background-color: green;
+    position: fixed;
+    bottom: 14px;
+    right: 14px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+   
+}
+.compose span {
+    position: fixed;
+    font-size: 4rem;
+    bottom: 2px;
+    right: 22px;
+    
+}
+
+.class_a{
+    text-decoration: none;
+    color: black;
+    
+}
+.p-list{
+  margin-right: 65px;
+
+}
